@@ -2,7 +2,7 @@
 
 # 🆓 Use Claude AI for Free — via AWS Bedrock + Cursor IDE
 
-### Stop paying $20/month. Get frontier-tier Claude models at **$0 out-of-pocket** using AWS promotional credits.
+### Stop paying $20/month. Get frontier-tier Claude models at **$0 out-of-pocket** using **$200 in guaranteed AWS credits**.
 
 [![GitHub Stars](https://img.shields.io/github/stars/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock?style=social)](https://github.com/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock?style=social)](https://github.com/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock/network/members)
@@ -19,7 +19,7 @@
 
 This is a **step-by-step, beginner-friendly guide** that shows you exactly how to:
 
-- ✅ Claim **$100–$200 in free AWS credits** (no tricks, no expiry games)
+- ✅ Claim **$200 in guaranteed free AWS credits** — $100 upfront + $100 from 5 quick tasks
 - ✅ Access **Claude 3.5 Sonnet, Claude 3.5 Haiku, and Claude 4.x** via Amazon Bedrock
 - ✅ Connect those models directly to **Cursor IDE** — just like a paid subscription
 - ✅ Keep your **monthly bill at exactly $0** with budget safeguards
@@ -33,7 +33,7 @@ This is a **step-by-step, beginner-friendly guide** that shows you exactly how t
 1. [Prerequisites](#prerequisites)
 2. [Cost Overview — Why This Is Actually Free](#cost-overview)
 3. [Phase 1 — Create & Verify Your AWS Account](#phase-1-create--verify-your-aws-account)
-4. [Phase 2 — Claim $100–$200 in Free Credits](#phase-2-claim-100200-in-free-credits)
+4. [Phase 2 — Claim Your Guaranteed $200 in Free Credits](#phase-2-claim-your-guaranteed-200-in-free-credits)
 5. [Phase 3 — Set Up a Budget Safety Net](#phase-3-set-up-a-budget-safety-net)
 6. [Phase 4 — Request Claude Model Access on Bedrock](#phase-4-request-claude-model-access-on-bedrock)
 7. [Phase 5 — Understand Routing & Rate Limits](#phase-5-understand-routing--rate-limits)
@@ -68,11 +68,13 @@ Here is a realistic breakdown of what you will spend:
 | :--- | :--- |
 | AWS account creation | $0 |
 | Identity verification hold | $1 (returned in 3–5 days) |
-| Onboarding credits earned | **−$100 to −$200** |
+| AWS account creation credit (automatic) | **−$100** |
+| 5 onboarding task credits ($20 × 5) | **−$100** |
+| **Total free credits** | **$200** |
 | Claude API usage (daily coding) | ~$2–$8/month, fully covered by credits |
 | **Your actual out-of-pocket cost** | **$0** |
 
-> Credits automatically apply before your card is billed. As long as you stay within the credit balance, you will never be charged.
+> AWS deposits the first **$100 automatically** when your account is verified. Complete the 5 short tasks in Phase 2 to unlock the remaining **$100** ($20 each). Both credit pools apply automatically before your card is ever billed.
 
 ---
 
@@ -103,19 +105,21 @@ This is the most commonly missed step. Without it, AWS restricts your access to 
 
 ---
 
-## Phase 2: Claim $100–$200 in Free Credits
+## Phase 2: Claim Your Guaranteed $200 in Free Credits
 
-> **Goal:** Stack AWS onboarding promotional credits to cover all your Bedrock usage.
+> **Goal:** Unlock all $200 in AWS promotional credits — $100 is automatic, $100 comes from 5 simple tasks.
 
-AWS gives developers free credits for completing short onboarding tasks inside the console. Each task takes under 2 minutes.
+### Part A — Your First $100 (Automatic)
 
-**Step 1 — Find the Credits Dashboard**
+As soon as your AWS account is verified and on the Pay-As-You-Go plan (Phase 1), AWS automatically deposits **$100 in promotional credits** into your account. You do not need to do anything extra.
 
 1. Go to the [AWS Billing Console](https://console.aws.amazon.com/billing/).
 2. In the left sidebar, click **Credits**.
-3. You will see your current credit balance. Initially it will be $0 — the tasks below will add to it.
+3. You should already see a **$100 credit voucher** listed. If it is not there yet, wait up to 24 hours after verifying your account.
 
-**Step 2 — Complete the 5 Onboarding Tasks (worth $20 each)**
+### Part B — Earn the Next $100 via 5 Quick Tasks ($20 each)
+
+AWS rewards you with an additional **$20 credit per task** for completing short console interactions. All 5 tasks take under 15 minutes total.
 
 Navigate to the AWS Console home page. Look for the **"Explore AWS" or "Earn AWS credits"** widget, or browse to each service directly:
 
@@ -129,10 +133,11 @@ Navigate to the AWS Console home page. Look for the **"Explore AWS" or "Earn AWS
 
 > ⚠️ **Terminate/delete the EC2 and RDS resources immediately** after creating them. Running them beyond a few minutes will not hurt under the Free Tier, but it is good practice. The credit is granted upon creation, not after running.
 
-**Step 3 — Verify your credit balance**
+### Part C — Confirm Your Full $200 Balance
 
 1. Return to **Billing Console → Credits**.
-2. You should see vouchers totaling $100 or more appear within a few minutes to 24 hours.
+2. You should see **two credit vouchers** — the automatic $100 and the $100 from your 5 tasks — for a total of **$200**.
+3. Credits may take up to 24 hours to appear after each task is completed.
 3. Credits are applied **automatically** before your card is ever billed.
 
 ---
@@ -344,7 +349,7 @@ Model string: us.anthropic.claude-3-5-sonnet-20241022-v2:0
 A: No. The $1 identity verification hold is returned in 3–5 business days. Credits automatically cover API charges. The $5 budget alert warns you before anything else happens.
 
 **Q: What happens when my credits run out?**
-A: AWS will start billing your card at the standard Bedrock inference rates. At typical daily coding usage (Haiku for 80% of requests), $100 in credits lasts 3–6 months. You can also apply for additional AWS credit programs (AWS Activate, AWS research grants) to keep extending your free runway.
+A: AWS will start billing your card at the standard Bedrock inference rates. At typical daily coding usage (Haiku for 80% of requests), **$200 in credits lasts 6–12+ months**. You can also apply for additional AWS credit programs (AWS Activate, AWS research grants) to keep extending your free runway.
 
 **Q: Can I use this with VS Code instead of Cursor?**
 A: Yes. Use the **Continue** extension ([continue.dev](https://continue.dev)) in VS Code. It supports AWS Bedrock as a provider with the same IAM credentials.
