@@ -1,185 +1,387 @@
-# Free-Tier Claude on Cursor via AWS Bedrock
+<div align="center">
 
-Bring your own key (BYOK) performance meets zero out-of-pocket development. This guide walk you through how to claim $100 to $200 in free AWS credits, request access to Anthropic's frontier Claude models on Amazon Bedrock, and safely route them directly into the Cursor IDE. By bypassing expensive personal subscriptions, you unlock the fastest, most reliable frontier-tier AI code generation.
+# 🆓 Use Claude AI for Free — via AWS Bedrock + Cursor IDE
 
----
+### Stop paying $20/month. Get frontier-tier Claude models at **$0 out-of-pocket** using AWS promotional credits.
 
-## Phase 1: AWS Onboarding & Unlocking the Paid Tier
+[![GitHub Stars](https://img.shields.io/github/stars/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock?style=social)](https://github.com/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock?style=social)](https://github.com/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock/network/members)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock/pulls)
 
-To access enterprise-ready AI services such as Amazon Bedrock, you must onboard with a verified billing profile.
+**If this guide saves you money, please ⭐ star and 🍴 fork this repo — it helps others find it!**
 
-1. **Sign Up for a Standard AWS Account:**
-   * Navigate to the [AWS Registration Page](https://aws.amazon.com/) and create a standard personal account.
-   * Provide a valid credit or debit card for identity verification. AWS will process a temporary $1 authorization hold to verify card validity, which is returned in 3-5 business days.
-
-2. **Verify/Upgrade to the Paid (Pay-as-you-go) Plan:**
-   * **Crucial Step:** By default, new accounts might experience limitations in provisioning resource quotas or accessing model registries. You must explicitly verify your account is associated with a standard **Pay-As-You-Go** billing plan.
-   * Go to the **AWS Billing Console**. Under **Billing Preferences** and **Payment Methods**, ensure your payment profile is fully verified with no outstanding balances.
-   * *Note:* Verifying or operating on the Pay-As-You-Go tier **does not** charge you immediately nor does it void your eligible AWS Free Tier benefits. It simply removes the sandbox barriers, allowing you to ingest promotional credits and request model access.
-
-[Insert Screenshot: AWS Billing Console highlighting Payment Methods and Pay-As-You-Go/Verified status]
+</div>
 
 ---
 
-## Phase 2: Claiming $100-$200 in Baseline Onboarding Credits
+## 💡 What Is This?
 
-Before applying for large startup grant programs, stack baseline credits directly from the AWS Console to fully offset your early API usage.
+This is a **step-by-step, beginner-friendly guide** that shows you exactly how to:
 
-1. **Locate the Credit Widget:**
-   * Go to the AWS Console homepage dashboard.
-   * Look for the widget titled **Explore AWS / Earn AWS credits** or go directly to the **Billing -> Credits** page.
+- ✅ Claim **$100–$200 in free AWS credits** (no tricks, no expiry games)
+- ✅ Access **Claude 3.5 Sonnet, Claude 3.5 Haiku, and Claude 4.x** via Amazon Bedrock
+- ✅ Connect those models directly to **Cursor IDE** — just like a paid subscription
+- ✅ Keep your **monthly bill at exactly $0** with budget safeguards
 
-2. **Complete the 5 Console Onboarding Mini-Tasks:**
-   AWS rewards developers with active credits (typically **$20 each**) for completing simple platform interactions:
-
-   * **Task 1: Set up an AWS Budget Alert ($20)**
-     * Create a cost budget to monitor your spend (details in Phase 3).
-   * **Task 2: Use the Amazon Bedrock Playground ($20)**
-     * Launch the Bedrock console, open the Chat or Text Playground, select any model, and send a sample developer prompt.
-   * **Task 3: Create an AWS Lambda Function ($20)**
-     * Navigate to AWS Lambda, select "Create function" from boilerplate Node.js or Python templates, and test run it once.
-   * **Task 4: Spin up and Terminate an EC2 Server ($20)**
-     * Launch a single `t2.micro` or `t3.micro` instance using the AWS Free Tier AMI, and then immediately terminate it.
-   * **Task 5: Launch a Free-Tier RDS Database ($20)**
-     * Instantiate a micro database (e.g., PostgreSQL or MySQL) under the RDS Free Tier configuration, then delete it.
-
-3. **Verify Active Credit Balance:**
-   * Navigate to **Billing Console -> Credits** to confirm your active credit voucher stack.
-   * Your credits will automatically apply to any downstream Bedrock inference charges before your card is ever billed.
-
-[Insert Screenshot: AWS Credits Console page showing a positive promotional credit balance of active, unexpired vouchers]
+> **No startup required. No company email. No enterprise plan. Just a personal AWS account and 30 minutes.**
 
 ---
 
-## Phase 3: Setting Up a Budget Alert & Safeguarding Your Balance
+## 📋 Table of Contents
 
-To guarantee that your out-of-pocket setup costs remain strictly $0, establish a hard ceiling via AWS Budgets.
-
-1. Navigate to the **AWS Budgets Console**.
-2. Click **Create budget** on the top right.
-3. Select the **Cost budget** option (Recommended) and click **Next**.
-4. Configure the following parameters:
-   * **Period:** Monthly
-   * **Budget renewal type:** Recurring budget
-   * **Budgeting method:** Fixed
-   * **Budget limit:** `5` (Set a strict $5.00 limit)
-5. Configure your Threshold Alerts:
-   * Click **Add an alert threshold**.
-   * Set the threshold at **100%** of the budgeted amount (Alerts at $5 spent) or **80%** (Alerts at $4 spent).
-   * Set the **Trigger** type to both **Actual** and **Forecasted** (so you are warned if current trajectories estimate a $5 breach).
-6. Configure Email Notifications:
-   * Input your primary developer email.
-   * (Optional) Connect to an Amazon SNS topic for SMS or webhook triggers.
-
-[Insert Screenshot: AWS Budget creation console showing a $5 cost limit with active actual/forecasted email alerts configured]
+1. [Prerequisites](#prerequisites)
+2. [Cost Overview — Why This Is Actually Free](#cost-overview)
+3. [Phase 1 — Create & Verify Your AWS Account](#phase-1-create--verify-your-aws-account)
+4. [Phase 2 — Claim $100–$200 in Free Credits](#phase-2-claim-100200-in-free-credits)
+5. [Phase 3 — Set Up a Budget Safety Net](#phase-3-set-up-a-budget-safety-net)
+6. [Phase 4 — Request Claude Model Access on Bedrock](#phase-4-request-claude-model-access-on-bedrock)
+7. [Phase 5 — Understand Routing & Rate Limits](#phase-5-understand-routing--rate-limits)
+8. [Phase 6 — Smart Model Selection (Make Credits Last)](#phase-6-smart-model-selection-make-credits-last)
+9. [Phase 7 — Create a Secure IAM API User](#phase-7-create-a-secure-iam-api-user)
+10. [Phase 8 — Connect Cursor IDE to AWS Bedrock](#phase-8-connect-cursor-ide-to-aws-bedrock)
+11. [Troubleshooting Common Errors](#troubleshooting-common-errors)
+12. [FAQ](#faq)
+13. [Contributing](#contributing)
 
 ---
 
-## Phase 4: Requesting Model Access in the Amazon Bedrock Catalog
+## Prerequisites
 
-To interact with Anthropic's Claude models, you must manually request access with a single-click request.
+Before you start, make sure you have:
+
+| Requirement | Details |
+| :--- | :--- |
+| A **credit or debit card** | Required for AWS identity verification only. A **$1 temporary hold** is placed and returned within 3–5 days. You will **not** be charged if you follow this guide. |
+| **Cursor IDE** installed | Download free at [cursor.com](https://cursor.com) |
+| ~30 minutes of time | Most steps are one-click. Credits apply automatically. |
+
+> **No prior AWS experience needed.** Every step includes exactly where to click.
+
+---
+
+## Cost Overview
+
+Here is a realistic breakdown of what you will spend:
+
+| Item | Cost |
+| :--- | :--- |
+| AWS account creation | $0 |
+| Identity verification hold | $1 (returned in 3–5 days) |
+| Onboarding credits earned | **−$100 to −$200** |
+| Claude API usage (daily coding) | ~$2–$8/month, fully covered by credits |
+| **Your actual out-of-pocket cost** | **$0** |
+
+> Credits automatically apply before your card is billed. As long as you stay within the credit balance, you will never be charged.
+
+---
+
+## Phase 1: Create & Verify Your AWS Account
+
+> **Goal:** Get a fully activated AWS account that can access Bedrock.
+
+**Step 1 — Create a standard AWS account**
+
+1. Go to [aws.amazon.com](https://aws.amazon.com/) and click **Create an AWS Account**.
+2. Enter your email address, set a root password, and choose an account name (e.g., `my-dev-account`).
+3. On the **Contact Information** screen, select **Personal** account type.
+4. Enter your **credit or debit card** details. AWS places a temporary **$1 authorization hold** (returned in 3–5 business days) to verify your identity — you are not charged anything.
+5. Complete the **SMS or phone call verification** step.
+6. Choose the **Basic Support (Free)** plan.
+7. You will receive a confirmation email. Sign in to the [AWS Console](https://console.aws.amazon.com/).
+
+**Step 2 — Confirm your account is on the Pay-As-You-Go plan**
+
+This is the most commonly missed step. Without it, AWS restricts your access to Bedrock model registries.
+
+1. In the AWS Console, click your account name (top right) → **Billing and Cost Management**.
+2. Go to **Payment methods** in the left sidebar.
+3. Confirm your card is listed and verified (green checkmark or no warning banners).
+4. Confirm there are no outstanding balances or account holds.
+
+> ℹ️ Being on the Pay-As-You-Go plan does **not** void your Free Tier benefits and does **not** charge you automatically. It simply removes sandbox restrictions so you can access Bedrock and claim credits.
+
+---
+
+## Phase 2: Claim $100–$200 in Free Credits
+
+> **Goal:** Stack AWS onboarding promotional credits to cover all your Bedrock usage.
+
+AWS gives developers free credits for completing short onboarding tasks inside the console. Each task takes under 2 minutes.
+
+**Step 1 — Find the Credits Dashboard**
+
+1. Go to the [AWS Billing Console](https://console.aws.amazon.com/billing/).
+2. In the left sidebar, click **Credits**.
+3. You will see your current credit balance. Initially it will be $0 — the tasks below will add to it.
+
+**Step 2 — Complete the 5 Onboarding Tasks (worth $20 each)**
+
+Navigate to the AWS Console home page. Look for the **"Explore AWS" or "Earn AWS credits"** widget, or browse to each service directly:
+
+| # | Task | What To Do | Credit |
+| :-- | :--- | :--- | :--- |
+| 1 | **Set up a Budget Alert** | Create any cost budget in AWS Budgets (detailed in Phase 3 below) | $20 |
+| 2 | **Use the Bedrock Playground** | Open Bedrock → Playgrounds → Chat → select any model → send one test message | $20 |
+| 3 | **Create an AWS Lambda Function** | Go to Lambda → Create function → choose a Node.js or Python blueprint → deploy it | $20 |
+| 4 | **Launch and Terminate an EC2 Instance** | Go to EC2 → Launch instance → pick `t2.micro` (Free Tier) → launch → then immediately terminate it | $20 |
+| 5 | **Create and Delete an RDS Database** | Go to RDS → Create database → pick MySQL or PostgreSQL → Free Tier template → create → then delete it | $20 |
+
+> ⚠️ **Terminate/delete the EC2 and RDS resources immediately** after creating them. Running them beyond a few minutes will not hurt under the Free Tier, but it is good practice. The credit is granted upon creation, not after running.
+
+**Step 3 — Verify your credit balance**
+
+1. Return to **Billing Console → Credits**.
+2. You should see vouchers totaling $100 or more appear within a few minutes to 24 hours.
+3. Credits are applied **automatically** before your card is ever billed.
+
+---
+
+## Phase 3: Set Up a Budget Safety Net
+
+> **Goal:** Set a $5/month alert so you are warned well before credits run out.
+
+1. Go to [AWS Budgets](https://console.aws.amazon.com/billing/home#/budgets).
+2. Click **Create budget** → select **Cost budget** → click **Next**.
+3. Configure the budget:
+   - **Budget name:** `bedrock-safety-net`
+   - **Period:** Monthly
+   - **Renewal type:** Recurring budget
+   - **Budgeting method:** Fixed
+   - **Budget amount:** `$5`
+4. Click **Next** → **Add an alert threshold**:
+   - **Threshold:** `80%` of budgeted amount (alerts you at $4 spent)
+   - **Trigger:** Set both **Actual** and **Forecasted**
+5. Enter your email address for notifications → click **Next** → **Create budget**.
+
+> You will now receive an email warning the moment your monthly spend approaches $5 — long before credits are depleted. Think of this as your early-warning system.
+
+---
+
+## Phase 4: Request Claude Model Access on Bedrock
+
+> **Goal:** Unlock Anthropic's Claude models in your AWS account.
 
 1. Open the [Amazon Bedrock Console](https://console.aws.amazon.com/bedrock/).
-2. Select a target region supporting the flagship Claude models. **US East (N. Virginia)** (`us-east-1`) or **US West (Oregon)** (`us-west-2`) are highly recommended.
-3. In the left-hand navigation pane, scroll to the absolute bottom and select **Model access**.
-4. In the main window, click the **Manage model access** button in the top right.
-5. Locate the **Anthropic** collection and check the specific options for:
-   * **Claude 3.5 Sonnet**
-   * **Claude 3.5 Haiku**
-   * **Claude 4.6 Sonnet** (or latest available Claude models)
-6. Click **Save changes** / **Submit**.
-7. *Verification:* No long forms or company URLs are required. Access is typically granted automatically within 1 to 5 minutes. Refresh the page to verify the status is marked **Access granted**.
+2. **Select your region** using the dropdown in the top-right corner. Recommended: `us-east-1` (N. Virginia) or `us-west-2` (Oregon). These regions have the widest model availability and highest rate limits.
+3. In the left sidebar, scroll to the very bottom and click **Model access**.
+4. Click the **Manage model access** button (top right of the page).
+5. Under the **Anthropic** section, check the following models:
+   - ☑ **Claude 3.5 Haiku** — Fast and cheap. Use for most tasks.
+   - ☑ **Claude 3.5 Sonnet** — Balanced power and cost.
+   - ☑ **Claude Sonnet 4** / **Claude 4.6 Sonnet** — Flagship. Use for complex tasks.
+6. Scroll down and click **Save changes**.
+7. Wait 1–5 minutes and refresh the page. Each model should show a green **"Access granted"** badge.
 
-[Insert Screenshot: Amazon Bedrock 'Model access' interface showcasing green checkmarks and 'Access granted' status for the Anthropic Claude product suite]
-
----
-
-## Phase 5: Understanding Bedrock Quotas & Inference Types
-
-Amazon Bedrock uses three structural routing lanes for querying frontier models. Understanding these is essential for configuring your IDE without hitting request limits:
-
-| Routing Lane | Description | Target Use Case & TPM / RPM Guidelines |
-| :--- | :--- | :--- |
-| **On-Demand** | Traditional single-region endpoint request mapping. | **Localized region locks.** May experience lower rate ceilings (Transactions Per Minute, or TPM) or outright depletion (e.g., 0 TPM) during peak continent hours. |
-| **Geo Cross-Region** | Automatically balances requests over endpoints within the same continent. | **Stable production and regional compliance.** Delivers higher availability and limits local outages by moving traffic seamlessly. |
-| **Global Cross-Region** | Dynamically bounces requests globally to the optimal available data center. | **Active development environment.** Uses strings like `us.anthropic.claude-sonnet-4-6` or `us.anthropic.claude-3-5-sonnet` to tap into massive 6M+ TPM thresholds with the lowest latency. |
-
-### Handling "0 TPM" Limits & Requesting Increases
-If a newly requested flagship model is limited to 0 TPM or you hit throttling errors, follow these steps:
-1. Click the vertical dots `⋮` adjacent to the model in the **Model access** section.
-2. Select **Edit quota** or navigate to **AWS Service Quotas**.
-3. Submit a modest limit increase request (e.g., set to `50,000` or `100,000` TPM).
-4. For verified pay-as-you-go checked accounts, validation and approval are generally resolved within a few hours.
-
-[Insert Screenshot: AWS Bedrock Quotas interface displaying active Transactions Per Minute (TPM) limits for Anthropic model families]
+> ✅ No approval forms, no company URL, no waiting days. Access is instant for personal accounts.
 
 ---
 
-## Phase 6: Budget Preservation Strategy (How to avoid draining the $100)
+## Phase 5: Understand Routing & Rate Limits
 
-Maximal credit lifespan is achieved by selective, context-aware model calling. Route your tasks to these two primary models:
+Amazon Bedrock has three routing modes. Choosing the right one determines your speed and reliability.
 
-### 1. Claude 3.5 Haiku (`us.anthropic.claude-3-5-haiku`)
-* **Task Type:** Repetitive syntax auditing, standard code generation templates, quick single-file debugging loops.
-* **Pricing Efficiency:** The cheapest operational model that easily fits inside minor credit margins. Use this for 80% of daily programming assistance.
+| Mode | How It Works | Best For | Rate Limit |
+| :--- | :--- | :--- | :--- |
+| **On-Demand** | Single-region, direct routing | Testing only | Low — can hit 0 TPM during peak hours |
+| **Cross-Region (Geo)** | Balances across your continent | Reliable daily use | Medium |
+| **Cross-Region (Global)** | Dynamically routes worldwide | Active development | Very High — 6M+ TPM |
 
-### 2. Claude 3.5 / 4.6 Sonnet (`us.anthropic.claude-sonnet-4-6` or `us.anthropic.claude-3-5-sonnet`)
-* **Task Type:** Elite multi-file refactoring, systemic architecture planning, heavy math or logic operations.
-* **Pricing Efficiency:** The perfect intersection of flagship performance and moderate consumption pricing.
+**Use Global Cross-Region for Cursor.** The model string format is:
 
-### ⚠️ Crucial Warning Note:
-Avoid selecting the **1M Context Length** specialized variants in Cursor for simple, daily coding. Processing extremely large files across massive context windows (over 200K tokens) can incur high input billing fees that quickly deplete your promotional credits. Always keep your codebase context panels curated and clean.
+```
+us.anthropic.claude-3-5-haiku-20241022-v1:0
+us.anthropic.claude-3-5-sonnet-20241022-v2:0
+us.anthropic.claude-sonnet-4-5
+```
 
----
+**If you see a "0 TPM" limit on a model:**
 
-## Phase 7: Generating Secure IAM Credentials
-
-To connect Cursor to Bedrock, you must establish secure, scoped API credentials. Never use your main administrative AWS root user credentials.
-
-1. Navigate to the **AWS IAM Console** (Identity and Access Management).
-2. In the sidebar, select **Users** and click **Create user**.
-3. Configure User Details:
-   * **User name:** `cursor-user`
-   * **Console access:** *Do not check* "Provide user access to the AWS Management Console" (this is a programmatic-only API user).
-4. Set Permissions:
-   * Select **Attach policies directly**.
-   * Search for and check the box next to **`AmazonBedrockFullAccess`**. (For maximum security, you can alternatively attach a custom policy that only permits `bedrock:InvokeModel` and `bedrock:InvokeModelWithResponseStream` on Anthropic models).
-5. Review and click **Create user**.
-6. Generate CLI Credentials:
-   * Click on the newly created `cursor-user` in the list.
-   * Select the **Security credentials** tab.
-   * Scroll to the **Access keys** section and click **Create access key**.
-   * Select **Command Line Interface (CLI)** or **Other** as the use case.
-   * Click through and copy both parameters:
-     * **Access Key ID**
-     * **Secret Access Key**
-   * *Important:* Copy these immediately or download the `.csv` file. Once you close this window, the Secret Access Key cannot be recovered.
-
-[Insert Screenshot: AWS IAM Console displaying successful completion of the Access Key set for 'cursor-user']
+1. Go to **Bedrock Console → Model access**.
+2. Click the **⋮ menu** next to the model.
+3. Select **View quota** → **Request quota increase**.
+4. Enter a value like `50000` TPM and submit.
+5. For verified Pay-As-You-Go accounts, approval usually takes a few hours.
 
 ---
 
-## Phase 8: Configuring Cursor IDE (Fixing Common Routing Bugs)
+## Phase 6: Smart Model Selection (Make Credits Last)
 
-Link your secure IAM keys inside the IDE to execute high-speed, local LLM payloads.
+Route tasks to the right model to maximize how long your $100–$200 lasts.
 
-1. Launch your **Cursor IDE**.
-2. Click the gear icon (**Settings `⚙️`**) in the top right corner (or press `Cmd/Ctrl + Shift + J`).
-3. Select **Models** in the settings configuration pane.
-4. Scroll down to the **AWS Bedrock** dropdown block and toggle it to **ON**.
-5. Input your programmatic AWS parameters:
-   * **Access Key ID:** `Your_IAM_Access_Key_ID`
-   * **Secret Access Key:** `Your_IAM_Secret_Access_Key`
-   * **Region:** Enter the specific geographical code where your models were requested (e.g., `us-east-1` or `us-west-2`).
-6. Specify the exact model string by writing it in the test model input:
-   * For Global Cross-Region Sonnet: `us.anthropic.claude-sonnet-4-6` or `us.anthropic.claude-3-5-sonnet`
-   * For Global Cross-Region Haiku: `us.anthropic.claude-3-5-haiku`
+### Use Claude 3.5 Haiku for ~80% of your work
+```
+Model string: us.anthropic.claude-3-5-haiku-20241022-v1:0
+```
+- ✅ Code completion, autocomplete, quick bug fixes
+- ✅ Explaining short functions
+- ✅ Generating boilerplate
+- ✅ Single-file edits
 
-### 🔧 Critical Troubleshooting Alert (Avoiding Code 400 Payload Mangling)
-If Cursor throws a request failure:
-`Request failed with status code 400: {"message": "model is required"}` or displays an unrecognized endpoint error, it is pointing to a metadata payload collision.
+### Use Claude 3.5 Sonnet or Claude 4 Sonnet for complex tasks
+```
+Model string: us.anthropic.claude-3-5-sonnet-20241022-v2:0
+             us.anthropic.claude-sonnet-4-5
+```
+- ✅ Multi-file refactoring
+- ✅ Architecture planning
+- ✅ Deep debugging across a full codebase
+- ✅ Complex logic or algorithm design
 
-* **The Cause:** Active integrations from other providers (especially **Azure OpenAI** or custom OpenAI endpoints) can sometimes leak their header structures into simultaneous prompt calls, corrupting the requests sent to Bedrock.
-* **The Resolution:** Navigate back to the Cursor **Models** settings panel and toggle **OFF (Gray)** all other unused third-party blocks (particularly Azure OpenAI and local LLM override configurations). This ensures your API client builds a clean, standard AWS header payload, instantly resolving the error.
+### ⚠️ What to avoid
 
-[Insert Screenshot: Cursor IDE Models setting panel with AWS Bedrock active, IAM keys populated, and other conflicting providers switched completely off]
+> **Do NOT use 1M-context variants for daily work.** Feeding a massive context window (200K+ tokens) into a model costs significantly more in input tokens. Keep your Cursor context panel clean — only include files directly relevant to your current task.
+
+---
+
+## Phase 7: Create a Secure IAM API User
+
+> **Goal:** Generate a dedicated API key for Cursor. Never use your root AWS account credentials.
+
+1. Go to the [AWS IAM Console](https://console.aws.amazon.com/iam/).
+2. In the left sidebar, click **Users** → **Create user**.
+3. **User details:**
+   - **User name:** `cursor-bedrock-user`
+   - ❌ Do **not** check "Provide user access to the AWS Management Console" — this is an API-only user.
+4. Click **Next** → **Attach policies directly**.
+5. Search for `AmazonBedrockFullAccess` and check the box next to it.
+
+   > 🔒 **Want tighter security?** Instead of `AmazonBedrockFullAccess`, create a custom inline policy with only these permissions:
+   > ```json
+   > {
+   >   "Effect": "Allow",
+   >   "Action": [
+   >     "bedrock:InvokeModel",
+   >     "bedrock:InvokeModelWithResponseStream"
+   >   ],
+   >   "Resource": "arn:aws:bedrock:*::foundation-model/anthropic.*"
+   > }
+   > ```
+
+6. Click **Next** → **Create user**.
+7. Click on the newly created user in the list → open the **Security credentials** tab.
+8. Scroll to **Access keys** → click **Create access key**.
+9. Select **Command Line Interface (CLI)** as the use case → click **Next** → **Create access key**.
+10. **Copy both values immediately:**
+    - `Access Key ID` (starts with `AKIA...`)
+    - `Secret Access Key`
+
+> 🚨 **Critical:** The Secret Access Key is shown **only once**. Copy it now or download the `.csv` file. If you lose it, you must delete and regenerate the key.
+
+---
+
+## Phase 8: Connect Cursor IDE to AWS Bedrock
+
+> **Goal:** Enter your IAM credentials into Cursor and start using Claude for free.
+
+1. Open **Cursor IDE**.
+2. Press `Ctrl + Shift + J` (Windows/Linux) or `Cmd + Shift + J` (Mac) to open **Settings**.
+3. Click the **Models** tab in the left sidebar.
+4. Scroll down to the **AWS Bedrock** section and toggle it **ON**.
+5. Fill in the fields:
+   - **Access Key ID:** paste your `AKIA...` key
+   - **Secret Access Key:** paste your secret key
+   - **Region:** `us-east-1` or `us-west-2` (match the region where you enabled models in Phase 4)
+6. In the model input field, type the model string:
+   ```
+   us.anthropic.claude-3-5-sonnet-20241022-v2:0
+   ```
+7. Click **Verify** or send a test message. You should get a response from Claude within seconds.
+8. Add additional model strings for quick switching:
+   ```
+   us.anthropic.claude-3-5-haiku-20241022-v1:0
+   us.anthropic.claude-sonnet-4-5
+   ```
+
+> ✅ You are now running frontier Claude AI at $0/month out of pocket.
+
+---
+
+## Troubleshooting Common Errors
+
+### Error: `Request failed with status code 400: {"message": "model is required"}`
+
+**Cause:** Another provider (Azure OpenAI, local LLM) is leaking its headers into the Bedrock request.
+
+**Fix:**
+1. Go to Cursor **Settings → Models**.
+2. Toggle **OFF** every provider except AWS Bedrock (especially Azure OpenAI and any local LLM block).
+3. Retry your request. This resolves the error immediately.
+
+---
+
+### Error: `ThrottlingException` or `0 TPM`
+
+**Cause:** The model's rate limit is too low for the region.
+
+**Fix:**
+1. Switch your model string to the Global Cross-Region prefix: `us.anthropic.claude-...` instead of a direct region endpoint.
+2. If still throttled, request a quota increase via **Bedrock Console → Model access → ⋮ → View quota → Request increase**.
+
+---
+
+### Error: `AccessDeniedException`
+
+**Cause:** The IAM user does not have the right permissions, or you are calling a model in a region where you have not yet requested access.
+
+**Fix:**
+1. Confirm `AmazonBedrockFullAccess` is attached to your `cursor-bedrock-user` in the IAM Console.
+2. Confirm the region in Cursor matches the region where you clicked **Save changes** in Bedrock Model Access.
+
+---
+
+### Credits are not showing up
+
+**Cause:** AWS can take up to 24 hours to reflect credits after task completion.
+
+**Fix:** Wait up to 24 hours and check **Billing Console → Credits**. If credits still do not appear after 48 hours, contact AWS Support via the console — they are generally responsive and will manually apply eligible credits.
+
+---
+
+## FAQ
+
+**Q: Will AWS charge my card if I follow this guide?**
+A: No. The $1 identity verification hold is returned in 3–5 business days. Credits automatically cover API charges. The $5 budget alert warns you before anything else happens.
+
+**Q: What happens when my credits run out?**
+A: AWS will start billing your card at the standard Bedrock inference rates. At typical daily coding usage (Haiku for 80% of requests), $100 in credits lasts 3–6 months. You can also apply for additional AWS credit programs (AWS Activate, AWS research grants) to keep extending your free runway.
+
+**Q: Can I use this with VS Code instead of Cursor?**
+A: Yes. Use the **Continue** extension ([continue.dev](https://continue.dev)) in VS Code. It supports AWS Bedrock as a provider with the same IAM credentials.
+
+**Q: Is this against AWS Terms of Service?**
+A: No. AWS publicly offers these onboarding credits to all new accounts. Using Bedrock for personal AI coding assistance is a fully supported and intended use case.
+
+**Q: Can I use this on a Mac, Windows, or Linux machine?**
+A: Yes. Cursor is cross-platform and the AWS configuration is identical on all operating systems.
+
+**Q: Which Claude model should I use by default?**
+A: Start with `us.anthropic.claude-3-5-haiku-20241022-v1:0` for speed and cost-efficiency. Switch to Sonnet only for complex multi-file tasks.
+
+---
+
+## Contributing
+
+Contributions are welcome! If you have found a better model string, an updated credit task, a new troubleshooting tip, or a clearer explanation:
+
+1. **Fork** this repository
+2. Create a branch: `git checkout -b improve/your-change`
+3. Make your edits to `README.md`
+4. Open a **Pull Request** with a short description
+
+Found an issue or outdated step? Open an [Issue](https://github.com/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock/issues).
+
+---
+
+<div align="center">
+
+### If this guide helped you save money, give it a ⭐ star — it helps others find it!
+
+[![Star this repo](https://img.shields.io/badge/⭐%20Star%20this%20repo-yellow?style=for-the-badge)](https://github.com/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock)
+[![Fork this repo](https://img.shields.io/badge/🍴%20Fork%20this%20repo-blue?style=for-the-badge)](https://github.com/mohan67nv/free-tier-claude-on-cursor-via-aws-bedrock/fork)
+
+---
+
+**MIT License** · Made with ❤️ for developers who code smart
+
+</div>
