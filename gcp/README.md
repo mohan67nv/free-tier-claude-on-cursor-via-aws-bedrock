@@ -30,6 +30,34 @@ This guide walks you through connecting **Cursor IDE** (and VS Code) to **Google
 
 ---
 
+## ⚠️ Critical Warnings — Read Before You Start
+
+These two mistakes will silently drain your $300 credits or charge your card directly. Read them first.
+
+### 1. Never click "Deploy Model" in the Model Garden
+
+The Model Garden shows two paths for each model: a **serverless API** path and a **"Deploy Model"** path.
+
+- The **serverless API** path is what this guide uses — pay per token, no infrastructure, covered by your credits.
+- The **"Deploy Model"** path spins up a **dedicated GPU cluster** (NVIDIA A100/H100 nodes). This is enterprise infrastructure that costs approximately **$148/hour (~$108,000/month)**. It will completely wipe out your $300 credits within a few hours.
+
+> ✅ Always choose the **API** or **OpenAI-compatible endpoint** option. Never click the blue **Deploy** button.
+
+### 2. Claude models on Vertex AI are NOT covered by GCP promotional credits
+
+This is the most important billing fact in this entire guide:
+
+| Model | Credit Coverage |
+| :--- | :--- |
+| **Gemini models** (Gemini 2.5 Pro, Gemini 2.0 Flash, etc.) | ✅ Fully covered by your $300 GCP credits |
+| **Anthropic Claude models via Vertex AI** | ❌ Treated as a **Marketplace purchase** — billed **directly to your card**, bypassing your GCP credits entirely |
+
+> Claude models are distributed through the GCP Marketplace as a third-party product. Google's promotional credit pool does not apply to Marketplace purchases. If you use Claude via Vertex AI, those charges go straight to your payment method.
+
+**Recommendation:** Use **Gemini models** to stay fully within your free $300 credits. If you need Claude, use the [AWS Bedrock guide](../aws/README.md) instead — Claude there is covered by the $200 AWS promotional credits.
+
+---
+
 ## 📋 Table of Contents
 
 1. [Prerequisites](#prerequisites)
@@ -70,11 +98,14 @@ This guide walks you through connecting **Cursor IDE** (and VS Code) to **Google
 | GCP account creation | $0 |
 | Identity verification hold | ~$1 (returned immediately or within a few days) |
 | **Google Cloud free trial credits** | **−$300** |
-| Gemini 2.5 Pro daily coding usage | ~$5–$15/month, fully covered by credits |
-| Claude Sonnet via Vertex AI daily use | ~$5–$20/month, fully covered by credits |
-| **Your actual out-of-pocket cost** | **$0** |
+| Gemini 2.5 Pro daily coding usage | ~$5–$15/month, **covered by $300 credits** |
+| Gemini 2.0 Flash daily coding usage | ~$1–$5/month, **covered by $300 credits** |
+| Claude via Vertex AI (if used) | Billed **directly to your card** — NOT covered by credits |
+| **Your actual out-of-pocket cost (Gemini only)** | **$0** |
 
-> The $300 trial is valid for 90 days. After that, GCP will **not** auto-charge you — your account moves to a free tier and services stop unless you manually upgrade. At typical daily AI coding usage, $300 covers 3–6 months of heavy use.
+> The $300 trial is valid for 90 days. After that, GCP will **not** auto-charge you — your account moves to a free tier and services stop unless you manually upgrade. At typical daily Gemini usage, $300 covers 3–6 months of heavy use.
+
+**💡 Cache cost tip:** Vertex AI uses a tiered caching layer for large codebases. Input tokens that hit the cache (files you sent in a previous prompt) cost ~**$0.25/1M tokens** (cache read). New or modified files cost ~**$3.22/1M tokens** (cache write). The cache TTL is **300 seconds (5 minutes)**. To keep costs low, group related prompts in the same chat tab and avoid switching files constantly — this keeps your context in the hot cache.
 
 ---
 
@@ -129,13 +160,13 @@ This guide walks you through connecting **Cursor IDE** (and VS Code) to **Google
    - Search for **Gemini 2.5 Pro** (or `gemini-2.5-pro-preview`).
    - Click the model card → click **Enable** or confirm it shows as available.
    - Repeat for **Gemini 2.0 Flash** for a faster, cheaper option.
-3. **Enable Anthropic Claude models:**
+3. **Enable Anthropic Claude models (optional — read the billing note first):**
    - Search for **Claude** in the Model Garden.
    - Click **Claude 3.5 Sonnet** → you will be asked to **accept Anthropic's terms of service** (a simple click-through agreement).
    - Repeat for **Claude Sonnet 4** / **Claude 3.5 Haiku** if available in your region.
 4. Confirm each model shows a green status or **"Enabled"** indicator.
 
-> ✅ Claude models on Vertex AI require accepting Anthropic's terms, but there is no extra cost and no approval waiting period.
+> ⚠️ **Claude billing reminder:** Claude models on Vertex AI are a Marketplace product and are billed directly to your card — your $300 GCP credits do not apply. Gemini models are fully covered. See the [Critical Warnings](#️-critical-warnings--read-before-you-start) section at the top for full details.
 
 ---
 
@@ -315,7 +346,41 @@ INFO: Uvicorn running on http://0.0.0.0:4000
 
 ## Other Ways to Use These Models
 
-### Method 2: VS Code + Continue Extension (No Cursor, No LiteLLM)
+### Method 2: Direct Token Connection (No LiteLLM — Gemini Only)
+
+For Gemini models only, you can connect Cursor directly to Vertex AI without running LiteLLM at all. This uses a short-lived OAuth2 bearer token instead of a proxy.
+
+**Step 1 — Generate a temporary access token:**
+```bash
+gcloud auth print-access-token
+```
+This prints a long token string. Copy the entire output.
+
+> ⚠️ **This token expires after 1 hour.** If Cursor returns an authentication error later, re-run this command and paste the new token into Cursor's API key field.
+
+**Step 2 — Configure Cursor:**
+1. Open Cursor → `Ctrl + Shift + J` → **Models** tab.
+2. Toggle the **OpenAI** block **ON**.
+3. Paste the token into the **OpenAI API Key** field.
+4. Toggle **Override OpenAI Base URL** ON and set it to your regional endpoint:
+   ```
+   https://REGION-aiplatform.googleapis.com/v1/projects/YOUR_PROJECT_ID/locations/REGION/endpoints/openapi
+   ```
+   Example for `us-central1`:
+   ```
+   https://us-central1-aiplatform.googleapis.com/v1/projects/cursor-vertex-ai-a1b2c3/locations/us-central1/endpoints/openapi
+   ```
+5. Scroll to **Add a model** and add:
+   - `google/gemini-2.5-pro-preview-06-05`
+   - `google/gemini-2.0-flash-001`
+6. **Disable all other model providers** to ensure traffic only goes to your endpoint.
+7. Select your model in a chat and send a test message.
+
+> **When to use this vs LiteLLM:** Use the direct token method for a quick test or if you only need Gemini. Use LiteLLM (Phases 6–8) for a permanent setup that doesn't require refreshing tokens every hour.
+
+---
+
+### Method 3: VS Code + Continue Extension (No Cursor, No LiteLLM)
 
 [Continue](https://continue.dev) supports Vertex AI natively in VS Code without needing a proxy.
 
@@ -347,7 +412,7 @@ INFO: Uvicorn running on http://0.0.0.0:4000
 
 ---
 
-### Method 3: Python SDK (Direct Vertex AI Calls)
+### Method 4: Python SDK (Direct Vertex AI Calls)
 
 Use the official `google-cloud-aiplatform` SDK for scripts, notebooks, or automation:
 
@@ -394,7 +459,7 @@ print(message.content[0].text)
 
 ---
 
-### Method 4: Google AI Studio (Gemini Only — No Setup)
+### Method 5: Google AI Studio (Gemini Only — No Setup)
 
 For quick Gemini testing without any setup:
 
@@ -402,11 +467,11 @@ For quick Gemini testing without any setup:
 2. Sign in with your Google account.
 3. Select a Gemini model and start prompting — free usage with Google account limits.
 
-> AI Studio uses a separate free tier (not your $300 credits). It is great for one-off tasks but does not support Claude models or IDE integration.
+> ⚠️ **Important:** AI Studio credits and your GCP Billing Account are **completely separate** funding pools. Credits added inside AI Studio only apply to the native Gemini developer API (`api.generativeai.google`). They do **not** transfer to Vertex AI. Conversely, your $300 GCP trial credits do not apply to AI Studio. Do not confuse the two consoles.
 
 ---
 
-### Method 5: LiteLLM with an API Key (Shareable Setup)
+### Method 6: LiteLLM with an API Key (Shareable Setup)
 
 If you want to share the proxy or use it from multiple machines, add an API key to LiteLLM:
 
@@ -479,6 +544,34 @@ Re-run this command and complete the browser login. Then restart the LiteLLM ser
 
 ---
 
+### Error: `resourcemanager.projects.get` — Permission Denied in the Console
+
+**Cause:** Chrome's multi-account session caching is using the wrong Google profile. The console is logged in as a different account than the one holding your credits and project.
+
+**Fix:**
+1. Check the **profile icon in the top-right** of the GCP Console — confirm it shows the Google account that created your project and holds your credits.
+2. Confirm the **project dropdown** (top navigation bar) shows your active project — not `"My First Project"` or an old default project.
+3. If the issue persists, explicitly grant the Viewer role to your account via the terminal:
+   ```bash
+   gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+     --member="user:your-email@gmail.com" \
+     --role="roles/viewer"
+   ```
+
+---
+
+### Direct token method: Cursor returns auth error after a while
+
+**Cause:** The `gcloud auth print-access-token` token has expired. Tokens are valid for **1 hour only**.
+
+**Fix:** Re-run the command and paste the new token into Cursor:
+```bash
+gcloud auth print-access-token
+```
+Go to Cursor **Settings → Models → OpenAI API Key** and replace the old token. This is why the LiteLLM proxy method (Phases 6–8) is recommended for daily use — it handles token refresh automatically.
+
+---
+
 ## FAQ
 
 **Q: Will Google charge my card automatically when the $300 trial ends?**
@@ -494,7 +587,10 @@ A: Yes — the proxy must be running for Cursor to work. You can set it up as a 
 A: Yes. You can run both — use Bedrock directly in Cursor's built-in AWS integration, and Vertex AI through the LiteLLM proxy. See the [AWS guide](../aws/README.md) for the Bedrock setup.
 
 **Q: Is Claude on Vertex AI the same as Claude on AWS Bedrock?**
-A: The underlying model weights are identical. The routing, pricing, and authentication differ. Bedrock is simpler to connect directly from Cursor. Vertex AI requires the LiteLLM proxy but gives access to both Gemini and Claude in one place.
+A: The underlying model weights are identical. However, there is a critical billing difference: Claude on Vertex AI is a Marketplace product and is **billed directly to your card** — your $300 GCP credits do not apply. Claude on AWS Bedrock is covered by the $200 AWS promotional credits. If you want Claude for free, use the [AWS guide](../aws/README.md).
+
+**Q: Does my $300 GCP credit cover Claude models on Vertex AI?**
+A: No. Claude is a third-party Marketplace product on GCP. Only first-party Google models (Gemini family) are covered by GCP promotional credits. Claude usage will be charged directly to your billing payment method.
 
 **Q: Can I use this on Mac, Windows, or Linux?**
 A: Yes. The gcloud CLI, Python, and LiteLLM all work on all three platforms.
