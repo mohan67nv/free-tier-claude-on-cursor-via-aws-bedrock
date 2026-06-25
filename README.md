@@ -57,14 +57,14 @@ Use Google Gemini 2.5 Pro, Gemini 2.0 Flash, Claude 3.5 Sonnet, and Claude 4 in 
 
 ---
 
-### 🔷 [Azure AI Foundry — DeepSeek, Mistral, GPT + more](azure/README.md)
+### 🔷 [Azure AI Foundry — DeepSeek, Mistral, OpenAI + more](azure/README.md)
 
-Use DeepSeek-V4-Pro, Mistral Large, GPT-4o, and embedding models in VS Code, Cursor, and Cline via Azure AI Foundry, with working Python scripts and a local proxy included.
+Use DeepSeek-V4-Pro, Mistral Large, OpenAI GPT-4o, and embedding models in VS Code, Cursor, and Cline via Azure AI Foundry, with working Python scripts and a local proxy included.
 
 | | |
 | :--- | :--- |
 | **Free credits** | **$200 guaranteed** + up to $1,000 via partner programs |
-| **Models available** | DeepSeek-V4-Pro, Mistral Large, GPT-4o, text-embedding-3-large |
+| **Models available** | DeepSeek-V4-Pro, Mistral Large, OpenAI GPT-4o, text-embedding-3-large |
 | **Setup method** | API key (direct) or local proxy — working scripts included |
 | **Estimated free runway** | Weeks to months depending on usage |
 | **Difficulty** | ⭐⭐ Intermediate — requires Azure CLI + Python |
@@ -79,7 +79,7 @@ Use DeepSeek-V4-Pro, Mistral Large, GPT-4o, and embedding models in VS Code, Cur
 | Claude models | ✅ Yes | ✅ Yes | ❌ No |
 | Gemini models | ❌ No | ✅ Yes | ❌ No |
 | DeepSeek / Mistral | ❌ No | ❌ No | ✅ Yes |
-| GPT-4o | ❌ No | ❌ No | ✅ Yes |
+| OpenAI models (GPT-4o, GPT-4 Turbo) | ❌ No | ❌ No | ✅ Yes |
 | Native Cursor support | ✅ Built-in | Requires LiteLLM | Via API key |
 | VS Code support | ✅ Via Continue | ✅ Via Continue | ✅ Via Cline / Continue |
 | Scripts included | ❌ | ❌ | ✅ Python scripts + proxy |
