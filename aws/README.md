@@ -180,8 +180,16 @@ Navigate to the AWS Console home page. Look for the **"Explore AWS" or "Earn AWS
    - ☑ **Claude Sonnet 4** / **Claude 4.6 Sonnet** — Flagship. Use for complex tasks.
 6. Scroll down and click **Save changes**.
 7. Wait 1–5 minutes and refresh the page. Each model should show a green **"Access granted"** badge.
+8. **Submit Anthropic use case details (one-time, Anthropic/Claude models only):**
+   - In the left sidebar, click **Model catalog** (under **Discover**).
+   - Click on any Claude model (e.g., **Claude Sonnet 4.6** or **Claude Opus 4.6**).
+   - If a yellow banner appears saying *“Anthropic requires first-time customers to submit use case details before invoking a model”*, click **Submit use case details**.
+   - Fill in a brief description of your intended use (e.g., `AI coding assistant for local development and debugging`) and submit.
+   - This is a **one-time step per AWS account**, only for Anthropic models. All other providers (Amazon, Cohere, Meta, etc.) do not require this.
 
-> ✅ No approval forms, no company URL, no waiting days. Access is instant for personal accounts.
+   ![Claude model use case submission](screenshots/Screenshot%20from%202026-06-25%2001-29-25.png)
+
+> ✅ After completing the use case submission, your Claude models are fully ready to invoke.
 
 ---
 
@@ -267,10 +275,17 @@ Model string: us.anthropic.claude-3-5-sonnet-20241022-v2:0
    > ```
 
 6. Click **Next** → **Create user**.
-7. Click on the newly created user → open the **Security credentials** tab.
-8. Scroll to **Access keys** → click **Create access key**.
-9. Select **Command Line Interface (CLI)** as the use case → click **Next** → **Create access key**.
-10. **Copy both values immediately:**
+8. Click on the newly created user → open the **Security credentials** tab.
+
+   ![IAM user security credentials tab](screenshots/Screenshot%20from%202026-06-25%2001-07-16.png)
+
+9. Scroll to **Access keys** → click **Create access key**.
+10. Select **Local code** as the use case (you are using this key from a local development environment) → check the confirmation checkbox → click **Next**.
+
+    ![Select Local code as access key use case](screenshots/Screenshot%20from%202026-06-25%2001-07-26.png)
+
+11. Optionally add a description tag (e.g., `cursor-ide-bedrock-access`) → click **Create access key**.
+12. **Copy both values immediately:**
     - `Access Key ID` (starts with `AKIA...`)
     - `Secret Access Key`
 
@@ -290,6 +305,9 @@ Model string: us.anthropic.claude-3-5-sonnet-20241022-v2:0
    - **Access Key ID:** paste your `AKIA...` key
    - **Secret Access Key:** paste your secret key
    - **Region:** `us-east-1` or `us-west-2` (match the region from Phase 4)
+
+   ![Cursor IDE AWS Bedrock settings](../aws/screenshots/Screenshot%20from%202026-06-25%2001-21-49.png)
+
 6. In the model input field, type the model string:
    ```
    us.anthropic.claude-3-5-sonnet-20241022-v2:0

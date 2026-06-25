@@ -32,7 +32,7 @@ This guide walks you through connecting **Cursor IDE** (and VS Code) to **Google
 
 ## ⚠️ Critical Warnings — Read Before You Start
 
-These two mistakes will silently drain your $300 credits or charge your card directly. Read them first.
+One common mistake can silently drain your $300 credits. Read this before you start.
 
 ### 1. Never click "Deploy Model" in the Model Garden
 
@@ -41,20 +41,20 @@ The Model Garden shows two paths for each model: a **serverless API** path and a
 - The **serverless API** path is what this guide uses — pay per token, no infrastructure, covered by your credits.
 - The **"Deploy Model"** path spins up a **dedicated GPU cluster** (NVIDIA A100/H100 nodes). This is enterprise infrastructure that costs approximately **$148/hour (~$108,000/month)**. It will completely wipe out your $300 credits within a few hours.
 
-> ✅ Always choose the **API** or **OpenAI-compatible endpoint** option. Never click the blue **Deploy** button.
+> ✅ Always click the **Enable** button to activate the serverless API. Never click the blue **Deploy** button.
 
-### 2. Claude models on Vertex AI are NOT covered by GCP promotional credits
+### 2. Both Gemini and Claude models are covered by your GCP credits
 
-This is the most important billing fact in this entire guide:
+Both model families are billed from your $300 free trial balance — there is no extra card charge:
 
 | Model | Credit Coverage |
 | :--- | :--- |
 | **Gemini models** (Gemini 2.5 Pro, Gemini 2.0 Flash, etc.) | ✅ Fully covered by your $300 GCP credits |
-| **Anthropic Claude models via Vertex AI** | ❌ Treated as a **Marketplace purchase** — billed **directly to your card**, bypassing your GCP credits entirely |
+| **Anthropic Claude models via Vertex AI** (Claude 3.5 Sonnet, Claude Sonnet 4, etc.) | ✅ Covered by your $300 GCP credits |
 
-> Claude models are distributed through the GCP Marketplace as a third-party product. Google's promotional credit pool does not apply to Marketplace purchases. If you use Claude via Vertex AI, those charges go straight to your payment method.
+> Claude models on Vertex AI are available as serverless API endpoints and draw from the same $300 GCP credit pool as Gemini. You can use both model families freely within your trial balance.
 
-**Recommendation:** Use **Gemini models** to stay fully within your free $300 credits. If you need Claude, use the [AWS Bedrock guide](../aws/README.md) instead — Claude there is covered by the $200 AWS promotional credits.
+**Recommendation:** Use **Gemini 2.0 Flash** for everyday coding (cheapest) and **Claude Sonnet** or **Gemini 2.5 Pro** for complex reasoning tasks. Both are fully covered by your free credits.
 
 ---
 
@@ -100,8 +100,8 @@ This is the most important billing fact in this entire guide:
 | **Google Cloud free trial credits** | **−$300** |
 | Gemini 2.5 Pro daily coding usage | ~$5–$15/month, **covered by $300 credits** |
 | Gemini 2.0 Flash daily coding usage | ~$1–$5/month, **covered by $300 credits** |
-| Claude via Vertex AI (if used) | Billed **directly to your card** — NOT covered by credits |
-| **Your actual out-of-pocket cost (Gemini only)** | **$0** |
+| Claude via Vertex AI (if used) | ~$3–$10/month, **covered by $300 credits** |
+| **Your actual out-of-pocket cost** | **$0** |
 
 > The $300 trial is valid for 90 days. After that, GCP will **not** auto-charge you — your account moves to a free tier and services stop unless you manually upgrade. At typical daily Gemini usage, $300 covers 3–6 months of heavy use.
 
@@ -166,7 +166,7 @@ This is the most important billing fact in this entire guide:
    - Repeat for **Claude Sonnet 4** / **Claude 3.5 Haiku** if available in your region.
 4. Confirm each model shows a green status or **"Enabled"** indicator.
 
-> ⚠️ **Claude billing reminder:** Claude models on Vertex AI are a Marketplace product and are billed directly to your card — your $300 GCP credits do not apply. Gemini models are fully covered. See the [Critical Warnings](#️-critical-warnings--read-before-you-start) section at the top for full details.
+> ✅ Claude models on Vertex AI are covered by your $300 GCP credits. When enabling a Claude model, look for and click the **Enable** button on the model card — this activates the serverless API endpoint. Never click **Deploy**, which provisions expensive dedicated GPU infrastructure.
 
 ---
 
