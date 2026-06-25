@@ -2,16 +2,16 @@
 
 ← [Back to Hub](../README.md)
 
-> **Use DeepSeek, Mistral, GPT, and more — directly in VS Code and Cursor — with up to $1,000 in free Azure credits. No credit card tricks, no subscription traps.**
+> **Use DeepSeek, Mistral, Meta Llama, Azure OpenAI (GPT) and more — directly in VS Code and Cursor — with $200–$1,000 in free Azure credits. No hidden charges — the card is only for identity verification.**
 
-This guide walks you through the **complete end-to-end process**: from creating a free Azure account with $1,000 in credits, to using powerful AI models like **DeepSeek-V4-Pro**, **Mistral Large**, and **text-embedding-3-large** inside your favorite IDE.
+This guide walks you through the **complete end-to-end process**: from creating a free Azure account, to using powerful AI models like **DeepSeek-V4-Pro**, **Mistral Large**, **Meta Llama**, and **Azure OpenAI GPT** inside your favorite IDE.
 
 ---
 
 ## 📖 Table of Contents
 
 - [What You Get](#-what-you-get)
-- [Step 1: Get $1,000 Free Azure Credits](#step-1-get-1000-free-azure-credits)
+- [Step 1: Get Free Azure Credits](#step-1-get-free-azure-credits)
 - [Step 2: Set Up Azure AI Foundry](#step-2-set-up-azure-ai-foundry)
 - [Step 3: Deploy Models](#step-3-deploy-models)
 - [Step 4: Connect to Your IDE](#step-4-connect-to-your-ide)
@@ -36,31 +36,49 @@ This guide walks you through the **complete end-to-end process**: from creating 
 
 | Benefit | Details |
 |---------|---------|
-| **$1,000 free Azure credits** | Valid for 30 days — enough to run models for months |
-| **Free AI models** | DeepSeek-V4-Pro, Mistral Large, embeddings, and more |
+| **$200–$1,000 free Azure credits** | $200 via standard sign-up · up to $1,000 via special promotional links (e.g. LinkedIn) · valid for 30 days |
+| **Free AI models** | DeepSeek-V4-Pro, Mistral Large, Meta Llama, Azure OpenAI GPT, and more |
 | **OpenAI-compatible API** | Works with any tool that supports OpenAI's API format |
 | **No subscription needed** | Credits are free, no auto-charge after expiration |
 | **Use in VS Code, Cursor, Cline** | Full IDE integration for AI-assisted coding |
 
+> ⚠️ **Available model families on Azure AI Foundry:** Azure OpenAI (GPT-4o, GPT-4 Turbo), Meta (Llama 3), Mistral (Mistral Large), and DeepSeek (DeepSeek-V4-Pro). Other providers may not be available.
+
 ---
 
-## Step 1: Get $1,000 Free Azure Credits
+## Step 1: Get Free Azure Credits
 
-### 1.1 Create Your Azure Account
+### 1.1 How Much Do You Get?
 
-1. Go to **[azure.microsoft.com/free](https://azure.microsoft.com/free)**
+| Sign-up Method | Credits | Valid For |
+|---|---|---|
+| **Standard sign-up** at [azure.microsoft.com/free](https://azure.microsoft.com/free) | **$200** | 30 days |
+| **Promotional link** (e.g. via LinkedIn campaigns) | **$1,000** | 30 days |
+| **Microsoft for Startups** | Up to $150,000 | 12 months |
+
+> 💡 **Pro tip:** Microsoft periodically runs promotional campaigns via LinkedIn and other platforms that give **$1,000** in credits instead of the standard $200. Check LinkedIn posts, Microsoft Azure newsletters, and tech communities for active promo links before signing up.
+
+### 1.2 Create Your Azure Account
+
+1. Go to **[azure.microsoft.com/free](https://azure.microsoft.com/free)** — or use a promotional link if you have one
 2. Click **"Start free"**
 3. Sign in with your Microsoft account (or create one)
 4. Verify your identity with a phone number (no charge)
-5. Add a credit/debit card for identity verification *(you will NOT be charged — the card is only for verification)*
+5. **Add your credit/debit card details** — this is required for identity verification only. You will **NOT be charged**. Azure uses this solely to confirm you are a real person.
 
-### 1.2 Activate Your Credits
+> 💳 **Card details step:** Enter your card number, expiry, and CVV when prompted. Microsoft places a small temporary authorization hold (usually $1) that is immediately released. No charges occur as long as you stay within the free tier.
 
-After signup, you'll see:
-- ✅ **$200 credit** — guaranteed for all new Azure accounts (valid 30 days)
-- 🔗 **Additional credits** — Microsoft often offers extra credits ($500–$800+) via LinkedIn Learning partnerships, student programs, or academic offers. Check your dashboard after signing up.
+### 1.3 Activate Your Credits & Check Subscription
 
-> 💡 **Pro tip:** Check [Microsoft for Startups Founders Hub](https://www.microsoft.com/startups) for up to **$150,000** in Azure credits if you're building a startup. Even without it, the standard $200 is enough to run models for weeks of daily coding.
+After signup, verify your credits are active:
+
+1. Go to **[portal.azure.com](https://portal.azure.com)**
+2. In the top search bar, type **"Subscriptions"** and click it
+3. Click on **"Azure subscription 1"** (or your subscription name)
+4. Under **Overview**, check your **Credits** — you should see your balance (e.g. **$200.00** or **$1,000.00** for promo)
+5. You can also navigate to **Cost Management** → **Credits** to see the full balance and expiry date
+
+> ✅ If credits show as active, you're ready to proceed. Credits are valid for **30 days** from account creation.
 
 ---
 
@@ -72,21 +90,32 @@ Azure AI Foundry (formerly Azure AI Studio) is Microsoft's platform for deployin
 
 ### 2.2 Create an AI Foundry Project
 
+![Azure portal home — click the waffle menu](screenshots/01-azure-portal-home.png)
+
 1. Go to **[ai.azure.com](https://ai.azure.com)**
-2. Click **"Create project"**
-3. Fill in:
-   - **Project name**: anything you like (e.g., `my-ai-models`)
-   - **Resource**: create new → choose an AI Services resource
-   - **Region**: pick one close to you (e.g., `swedencentral`, `eastus`, `westeurope`)
+2. In the top-left, click the **waffle/grid menu** and select **AI Foundry**
 
-4. Wait ~2 minutes for provisioning
+   ![Waffle menu showing AI Foundry](screenshots/02-ai-foundry-menu.png)
+3. Click **"Create project"** — fill in the form as shown below:
 
-### 2.3 Find Your Endpoint
+   ![Create a project dialog](screenshots/03-create-project.png)
 
-Once provisioned, navigate to **Settings** → find your **Endpoint URL**. It looks like:
+4. Fill in the form:
+   - **Project name**: anything you like (e.g., `my-project`)
+   - **Foundry resource**: create new or use an existing one
+   - **Subscription**: select `Azure subscription 1`
+   - **Resource group**: create new resource group
+   - **Region**: pick one close to you (e.g., `Sweden Central`, `East US`, `West Europe`)
+
+5. Leave **"Set up recommended resources"** toggled **on** — this provisions App Insights automatically
+6. Click **Create** and wait ~2 minutes for provisioning
+
+### 2.3 Find Your Project Endpoint
+
+Once provisioned, click on a deployed model and note your **Project endpoint**. It looks like:
 
 ```
-https://YOUR-RESOURCE-NAME.services.ai.azure.com/openai/v1
+https://YOUR-RESOURCE.services.ai.azure.com/api/projects/YOUR-PROJECT-NAME
 ```
 
 Keep this URL — you'll need it for all IDE connections.
@@ -97,21 +126,35 @@ Keep this URL — you'll need it for all IDE connections.
 
 ### 3.1 Deploy from Model Catalog
 
-1. In AI Foundry, go to **Model catalog** (left sidebar)
-2. Browse or search for models:
-   - **DeepSeek-V4-Pro** (recommended for coding)
-   - **Mistral Large** (great for general reasoning)
-   - **text-embedding-3-large** (for embeddings/search)
-3. Click **Deploy** on your chosen model
-4. Note the **deployment name** — this is what you'll use as the `model` parameter
+1. In AI Foundry, go to **Deployments** (left sidebar)
+2. Click the **Models** tab → then click **Deploy model**
+3. Browse or search for models (only these families are available on Azure AI Foundry):
+   - **Azure OpenAI**: `GPT-4o`, `GPT-4 Turbo`, `GPT-3.5 Turbo`
+   - **Meta**: `Llama-3.1-8B-Instruct`, `Llama-3.3-70B-Instruct`
+   - **Mistral**: `Mistral-Large-3` *(recommended for reasoning)*
+   - **DeepSeek**: `DeepSeek-V4-Pro` *(recommended for coding)*
+4. Click **Deploy** → choose **Serverless deployment** (uses credits, no GPU provisioning needed)
+5. Note the **deployment name** — this is what you'll use as the `model` parameter
+
+![Deployments list in AI Foundry](screenshots/04-deployments-list.png)
 
 ### 3.2 Recommended Deployments
 
 | Model | Deployment Name | Use Case | ~Cost |
 |-------|----------------|----------|-------|
-| `DeepSeek-V4-Pro` | `DeepSeek-V4-Pro` | Coding, agents | ~$1.80/M tokens |
-| `Mistral-Large-3` | `Mistral-Large-3-2` | Reasoning, writing | ~$4.00/M tokens |
+| `DeepSeek-V4-Pro` | `DeepSeek-V4-Pro` | Coding, agents | ~$0.55/$2.19 per 1M tokens |
+| `Mistral-Large-3` | `Mistral-Large-3` *(your chosen name)* | Reasoning, writing | ~$2.00/$6.00 per 1M tokens |
 | `text-embedding-3-large` | `text-embedding-3-large` | Embeddings, RAG | ~$0.13/M tokens |
+
+### 3.3 Copy Your API Key
+
+After deploying, click on the model name in the Deployments list. A detail panel opens showing:
+- **Project endpoint** — copy this (format: `https://....services.ai.azure.com/api/projects/YOUR-PROJECT`)
+- **API Key** — click the **copy icon** next to the masked key
+
+![Copy API key from deployment detail panel](screenshots/05-api-key-copy.png)
+
+> 🔑 Keep these two values safe — you'll paste them into your IDE next.
 
 ---
 
@@ -183,8 +226,15 @@ python run_model.py
 
 #### Step B1: Get Your API Key
 
+**Option 1 — From Azure AI Foundry UI (recommended):**
+1. Go to **[ai.azure.com](https://ai.azure.com)** → open your project
+2. Click **Deployments** in the left sidebar
+3. Click on any deployed model (e.g., `DeepSeek-V4-Pro`)
+4. In the detail panel, find the **API Key** field — click the **copy icon** (📋) next to the masked key
+5. Also copy the **Project endpoint** URL shown above it
+
+**Option 2 — Using Azure CLI:**
 ```bash
-# Using Azure CLI directly:
 az cognitiveservices account keys list \
   --resource-group YOUR-RESOURCE-GROUP \
   --name YOUR-RESOURCE-NAME \
@@ -203,7 +253,7 @@ python get_api_key.py
 
 | Setting | Value |
 |---------|-------|
-| **Base URL** | `https://YOUR-RESOURCE.services.ai.azure.com/openai/v1` |
+| **Base URL** | `https://YOUR-RESOURCE.services.ai.azure.com/api/projects/YOUR-PROJECT-NAME` |
 | **API Key** | *(paste the key from Step B1)* |
 | **Model** | `DeepSeek-V4-Pro` |
 
@@ -288,22 +338,24 @@ VS Code has **two** ways to use AI models:
 
 ### Cursor IDE
 
-Cursor supports custom OpenAI-compatible providers — perfect for your Azure models.
+Cursor supports custom OpenAI-compatible providers via its **Override OpenAI Base URL** setting — perfect for your Azure models.
 
 #### Setup (Method B — API Key):
 
-1. Open Cursor → **Settings** (gear icon) → **Models**
-2. Under **"OpenAI Compatible"**, add a new provider:
+1. Open Cursor → **Settings** (gear icon or `Ctrl+Shift+J`) → **Models** tab
+2. Scroll down to **"OpenAI API Key"** — toggle it **on** and paste your API key from Step 3.3
+3. Scroll further to **"Override OpenAI Base URL"** — toggle it **on** and paste your project endpoint:
 
-| Setting | Value |
-|---------|-------|
-| **Name** | `Azure Foundry` |
-| **Base URL** | `https://YOUR-RESOURCE.services.ai.azure.com/openai/v1` |
-| **API Key** | *(your API key from Method B)* |
+   ![Cursor Override OpenAI Base URL setting](screenshots/06-cursor-settings.png)
+   ```
+   https://YOUR-RESOURCE.services.ai.azure.com/api/projects/YOUR-PROJECT-NAME
+   ```
+4. Scroll back up and under **"Model Names"**, add your deployment names:
+   - `DeepSeek-V4-Pro`
+   - `Mistral-Large-3` *(use whatever deployment name you chose)*
+5. Select your model from the model dropdown at the top of the chat panel and start coding!
 
-3. Add models: `DeepSeek-V4-Pro`, `Mistral-Large-3-2`
-
-4. Select your model from the model dropdown and start coding!
+> 💡 Both **OpenAI API Key** and **Override OpenAI Base URL** must be toggled **on** for Cursor to route requests to Azure instead of OpenAI.
 
 ---
 
@@ -353,17 +405,16 @@ In your `~/.continue/config.json`:
 
 ## 🧠 Available Models
 
-Here are models commonly available on Azure AI Foundry (availability varies by region):
+Azure AI Foundry supports models from **four** providers only. Check the **Model Catalog** in [ai.azure.com](https://ai.azure.com) for the current list, as availability varies by region.
 
-| Category | Models | Best For |
+| Provider | Models | Best For |
 |----------|--------|----------|
-| **Coding** | DeepSeek-V4-Pro, DeepSeek-Coder | Code generation, debugging, agents |
-| **Reasoning** | Mistral Large, GPT-4o, Llama 3 | Complex analysis, writing |
-| **Embeddings** | text-embedding-3-large, text-embedding-3-small | Semantic search, RAG |
-| **Vision** | GPT-4o, GPT-4 Turbo with Vision | Image analysis |
-| **Speech** | Whisper | Audio transcription |
+| **Azure OpenAI** | GPT-4o, GPT-4 Turbo, GPT-3.5 Turbo | General purpose, vision, reasoning |
+| **Meta** | Llama-3.1-8B, Llama-3.3-70B, Llama-3.2-Vision | Coding, open-source alternative |
+| **Mistral** | Mistral-Large-3, Mistral-Small | Reasoning, writing, multilingual |
+| **DeepSeek** | DeepSeek-V4-Pro, DeepSeek-Coder | Code generation, debugging, agents |
 
-Check the **Model Catalog** in [ai.azure.com](https://ai.azure.com) for the full list.
+> ⚠️ **Note:** Models from Anthropic (Claude), Google (Gemini), Cohere, or other providers are **not available** on Azure AI Foundry. Only the four families above are supported.
 
 ---
 
@@ -372,15 +423,15 @@ Check the **Model Catalog** in [ai.azure.com](https://ai.azure.com) for the full
 ### How Billing Works
 
 - You pay per **token** (input + output)
-- Costs are deducted from your **$1,000 Azure credits**
+- Costs are deducted from your Azure credits ($200 standard · $1,000 promotional)
 - No charges to your card as long as you have credits
-- Credits expire after **30 days** (or 12 months for some programs)
+- Credits expire after **30 days** from account creation
 
 ### Monitor Your Spending
 
-1. Go to **[portal.azure.com](https://portal.azure.com)** → **Cost Management**
-2. Set up a **budget alert** to notify you at $500, $800, etc.
-3. Check remaining credits under **Subscriptions** → **Credits**
+1. Go to **[portal.azure.com](https://portal.azure.com)** → search **"Subscriptions"**
+2. Click **"Azure subscription 1"** → view **Credits** under Overview
+3. Set up a **budget alert** in **Cost Management** to notify you when nearing your limit
 
 ### Approximate Costs
 
@@ -424,7 +475,7 @@ Check the **Model Catalog** in [ai.azure.com](https://ai.azure.com) for the full
 ## ❓ FAQ
 
 ### Q: Is this really free?
-**A:** Yes! Microsoft gives $200 free credits plus additional credits via programs like LinkedIn Learning and Microsoft for Startups. You're never auto-charged. When credits expire, your services stop — you manually choose to upgrade to pay-as-you-go.
+**A:** Yes! Standard sign-up gives $200 free credits. Promotional links (often shared via LinkedIn) can give up to $1,000. You're never auto-charged. When credits expire, your services stop — you manually choose to upgrade to pay-as-you-go.
 
 ### Q: What happens after my credits expire?
 **A:** Your deployments pause. You can either add funds or wait for the next free credit offer.
@@ -433,13 +484,13 @@ Check the **Model Catalog** in [ai.azure.com](https://ai.azure.com) for the full
 **A:** Yes! There are no restrictions on how you use the models. The credits work the same as paid Azure.
 
 ### Q: Which model is best for coding?
-**A:** **DeepSeek-V4-Pro** is our top recommendation. It's fast, affordable, and excellent at code generation.
+**A:** **DeepSeek-V4-Pro** is our top recommendation. It's fast, affordable, and excellent at code generation. For general reasoning, **Mistral-Large-3** is a great alternative.
 
 ### Q: Do I need a GPU or powerful computer?
 **A:** No! Everything runs on Azure's cloud. You just need an internet connection and any modern laptop.
 
 ### Q: How does this compare to ChatGPT/Copilot subscriptions?
-**A:** ChatGPT Pro is $200/month. GitHub Copilot is $10/month. With Azure credits, you pay **per token** instead of a flat fee — which can be much cheaper if you use it moderately. Plus, you get access to many different models, not just one.
+**A:** ChatGPT Pro is $200/month. GitHub Copilot is $10/month. With Azure credits, you pay **per token** instead of a flat fee — which can be much cheaper if you use it moderately. Plus, you get access to models from Azure OpenAI, Meta, Mistral, and DeepSeek — not just one provider.
 
 ### Q: Can I share my credits/endpoint with friends?
 **A:** Yes, but they'll need either an API key or Azure credentials with access to your resource. For teams, set up proper RBAC (Role-Based Access Control) in the Azure portal.
@@ -458,5 +509,5 @@ This guide is MIT licensed. The models themselves have their own licenses — ch
 
 <p align="center">
   <b>Made with ☁️ Azure AI Foundry</b><br>
-  <i>Free models, free credits, free knowledge.</i>
+  <i>Azure OpenAI · Meta · Mistral · DeepSeek — free credits, free knowledge.</i>
 </p>
