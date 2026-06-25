@@ -76,7 +76,7 @@ Use DeepSeek-V4-Pro, Mistral Large, GPT-4o, and embedding models in VS Code, Cur
 | Free credits | $200 | $300 | $200–$1,000 |
 | Credits expire? | No expiry | 90-day trial | 30 days |
 | Auto-charge after trial? | No | No | No |
-| Claude models | ✅ Yes | ✅ Yes (billed to card) | ❌ No |
+| Claude models | ✅ Yes | ✅ Yes | ❌ No |
 | Gemini models | ❌ No | ✅ Yes | ❌ No |
 | DeepSeek / Mistral | ❌ No | ❌ No | ✅ Yes |
 | GPT-4o | ❌ No | ❌ No | ✅ Yes |
@@ -85,7 +85,7 @@ Use DeepSeek-V4-Pro, Mistral Large, GPT-4o, and embedding models in VS Code, Cur
 | Scripts included | ❌ | ❌ | ✅ Python scripts + proxy |
 | Setup complexity | Low | Medium | Medium |
 
-> **Recommendation:** Start with the **AWS guide** if you want the simplest setup and need Claude. Use the **GCP guide** for Gemini models. Use the **Azure guide** if you want DeepSeek, Mistral, or GPT-4o with ready-to-run Python scripts.
+> **Recommendation:** Start with the **AWS guide** if you want the simplest setup and need Claude. Use the **GCP guide** for Gemini models or Claude via $300 free credits. Use the **Azure guide** if you want DeepSeek, Mistral, or GPT-4o with ready-to-run Python scripts.
 
 ---
 
